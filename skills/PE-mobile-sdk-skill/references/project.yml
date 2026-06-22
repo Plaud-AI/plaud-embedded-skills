@@ -41,6 +41,7 @@ targets:
     info:
       path: PlaudTemplateApp/Info.plist
       properties:
+        CFBundleDisplayName: AppName
         UILaunchScreen:
           UIColorName: "systemBackground"
         UserAccessToken: $(USER_ACCESS_TOKEN)

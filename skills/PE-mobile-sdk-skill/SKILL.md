@@ -30,14 +30,14 @@ Follow the instructions in the [Installation Guide](https://docs.plaud.ai/plaud-
 2. If the user already has an existing mobile app they're working on, jump to the section on "How to Implement the Embedded SDK for iOS"
 
 
-## How to Deploy the Plaud Starter App
+#### How to Deploy the Plaud Starter App
 The Plaud Starter App is a fully built out iOS app with the Embedded SDK already implemented.
 
 The Starter App comes with [many built-out features](https://docs.plaud.ai/plaud-embedded/starter-app-specs.md) the user can immediately use.
 
 Direct the user to clone the Starter App repo and go through the steps in the [Starter App Guide](https://docs.plaud.ai/plaud-embedded/starter-app-guide.md)
 
-## How to Implement the Embedded SDK for iOS
+#### How to Implement the Embedded SDK for iOS
 The Embedded SDK is an iOS library for :
 
 1. Connecting (binding) Plaud devices to the user's iOS mobile app
@@ -53,7 +53,7 @@ For further reference, explore:
     * [DeviceManager.swift](https://raw.githubusercontent.com/Plaud-AI/plaud-sdk-public/refs/heads/main/plaud-template-app/ios/PlaudTemplateApp/Managers/DeviceManager.swift)
     * [SyncManager.swift](https://raw.githubusercontent.com/Plaud-AI/plaud-sdk-public/refs/heads/main/plaud-template-app/ios/PlaudTemplateApp/Managers/SyncManager.swift)
 
-## How to Implement the Embedded SDK for Android
+#### How to Implement the Embedded SDK for Android
 The Embedded SDK for Android is not out yet! Get started with using the SDK for the user's iOS in the meantime.
 
 ## Definition of Done - Completed Implementation of the Embedded SDK
