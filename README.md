@@ -46,14 +46,19 @@ npx skills update
 
 ```prompt
 How does Plaud Embedded work?
-
+```
+```prompt
 How do I get my Plaud credentials?
-
+```
+```prompt
 Setup Plaud auth for my app
-
+```
+```prompt
 Deploy the Plaud iOS starter app
-
+```
+```prompt
 Set up device connection to Plaud devices
-
+```
+```prompt
 Implement the Transcription API logic
 ```
