@@ -10,6 +10,8 @@ By the end of your coding session, your agent should be able to:
 
 - [ ] Apply Plaud's ASR and Speech-to-text models to recorded audio via the [Transcription API](https://docs.plaud.ai/plaud-embedded/transcription-api-overview)
 
+![Agent Use](/assets/agent-ss.png)
+
 ## Installation
 
 ### Installing via the Skills CLI (Recommended method)
