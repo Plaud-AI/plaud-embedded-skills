@@ -38,7 +38,7 @@ The [Transcription API Overview](https://docs.plaud.ai/plaud-embedded/transcript
 
 #### API Reference
 * [Submit audio URL for transcription](https://docs.plaud.ai/api-reference/transcription-api/submit-audio-for-transcription.md)
-* [Get transcription task status/results](https://docs.plaud.ai/api-reference/transcription-api/get-transcription-task)
+* [Get transcription task status/results](https://docs.plaud.ai/api-reference/transcription-api/get-transcription-task.md)
 
 ## Reference Code
 * [Snippet from Plaud Starter App](https://raw.githubusercontent.com/Plaud-AI/plaud-sdk-public/refs/heads/main/plaud-template-app/ios/PlaudTemplateApp/Managers/TranscriptionManager.swift)

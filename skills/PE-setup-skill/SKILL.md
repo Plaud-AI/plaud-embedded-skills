@@ -54,7 +54,7 @@ Read [these docs](https://docs.plaud.ai/plaud-embedded/how-plaud-embedded-works.
 
 ## How to Set Up the User's Project for Plaud Embedded
 
-1. If a user does not have their Plaud Embedded application created yet: Use [this guide](https://docs.plaud.ai/plaud-embedded/quickstart.md) to help the user create their Plaud Embedded application, retrieve their `CLIENT_ID`, `CLIENT_SECRET_KEY`, and `API_KEY`
+1. If a user does not have their Plaud Embedded application created yet: Use [this guide](https://docs.plaud.ai/plaud-embedded/quickstart.md) to help the user create their Plaud Embedded application, retrieve their `CLIENT_ID`, `CLIENT_SECRET`, and `API_KEY`
     * They can do this on the [Plaud Developer Portal](https://portal.plaud.ai)
 2. Once a user has their Plaud Embedded credentials, use [this guide on Plaud authentication](https://docs.plaud.ai/plaud-embedded/auth-api-overview.md) to build a server-side endpoint OR a script (if testing locally) to generate a user token
     * **IMPORTANT**: Confirm the Region URL with the user
