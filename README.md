@@ -62,3 +62,4 @@ Set up device connection to Plaud devices
 ```prompt
 Implement the Transcription API logic
 ```
+
