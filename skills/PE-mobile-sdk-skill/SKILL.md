@@ -23,11 +23,17 @@ Follow the instructions in the [Installation Guide](https://docs.plaud.ai/plaud-
 
 **Please Note** the compatibility version requirements and the entitlements necessary for the Embedded SDK for iOS. See the [sample xCode config](references/project.yml) for how to include bundle, frameworks, and entitlements.
 
-### Two Ways to Start
+### Choose Your Integration Path
 
-1. If the user does NOT have an existing mobile app, and would like to use Plaud's Starter App, jump to the "How to Deploy the Plaud Starter App" section
+The Embedded SDK is a **native iOS SDK**, but there are multiple ways to use it depending on the user's stack:
 
-2. If the user already has an existing mobile app they're working on, jump to the section on "How to Implement the Embedded SDK for iOS"
+1. **No existing app** → Deploy Plaud's iOS Starter App. Jump to the "How to Deploy the Plaud Starter App" section.
+
+2. **Existing native iOS app** → Implement the SDK directly. Jump to the "How to Implement the Embedded SDK for iOS" section.
+
+3. **React Native app** → Use Plaud's Expo Native Module. Jump to the "How to Use the Embedded SDK from React Native" section.
+
+4. **Web app** → Wrap it into a native iOS app with Plaud's Capacitor plugin. Jump to the "How to Use the Embedded SDK from a Web App (Capacitor)" section.
 
 
 #### How to Deploy the Plaud Starter App
@@ -40,10 +46,14 @@ Direct the user to clone the Starter App repo and go through the steps in the [S
 #### How to Implement the Embedded SDK for iOS
 The Embedded SDK is an iOS library for :
 
-1. Connecting (binding) Plaud devices to the user's iOS mobile app
-2. Syncing audio from Plaud devices to the user's mobile app
+1. Connecting (binding) and unbinding Plaud devices to the user's iOS mobile app
+2. Syncing audio from Plaud devices to the user's mobile app — via BLE or WiFi Fast Transfer (~10x faster), including batch download of all recordings
+3. Exporting audio in multiple formats (`.opus`, `.mp3`, `.wav`, `.pcm`)
+4. Firmware over-the-air (OTA) updates for connected Plaud devices
 
-Use the [iOS SDK documentation](https://docs.plaud.ai/plaud-embedded/ios-sdk.md) for the key methods and protocols included in the SDK.
+The SDK is delegate-driven — you implement protocols (`PlaudDeviceAgentProtocol`, `AudioExportCallback`, `PlaudWiFiAgentProtocol`) to receive device events, transfer progress, and results.
+
+Use the [iOS SDK documentation](https://docs.plaud.ai/plaud-embedded/ios-sdk.md) for the key methods and protocols included in the SDK. See the [changelog](https://docs.plaud.ai/plaud-embedded/changelog.md) for the latest SDK features.
 
 For further reference, explore:
 
@@ -53,8 +63,24 @@ For further reference, explore:
     * [DeviceManager.swift](https://raw.githubusercontent.com/Plaud-AI/plaud-sdk-public/refs/heads/main/plaud-template-app/ios/PlaudTemplateApp/Managers/DeviceManager.swift)
     * [SyncManager.swift](https://raw.githubusercontent.com/Plaud-AI/plaud-sdk-public/refs/heads/main/plaud-template-app/ios/PlaudTemplateApp/Managers/SyncManager.swift)
 
+#### How to Use the Embedded SDK from React Native
+Plaud's iOS SDK can be used in React Native through an [Expo Native Module](https://docs.expo.dev/modules/overview/). Plaud ships a `plaud-sdk` Expo module (with a typed JS/TypeScript interface) plus an example app.
+
+Follow the [React Native guide](https://docs.plaud.ai/plaud-embedded/react-native.md) to clone the module, copy it into the user's Expo app, add BLE permissions, and call the SDK from JavaScript.
+
+* [Embedded React Native repo](https://github.com/Plaud-AI/embedded-react-native)
+* Install the dedicated skill for full codebase context: `npx skills add Plaud-AI/embedded-react-native`
+
+#### How to Use the Embedded SDK from a Web App (Capacitor)
+Any web app can be turned into a native iOS app that connects to Plaud devices using Plaud's [Capacitor](https://capacitorjs.com/) plugin (`PlaudPlugin`), which is built on top of the native iOS SDK.
+
+Follow the [Web App to iOS guide](https://docs.plaud.ai/plaud-embedded/web-app-wrapper.md) to set up Capacitor, install the `PlaudPlugin`, and drive the SDK from your web app's JavaScript.
+
+* [Embedded Capacitor repo](https://github.com/Plaud-AI/embedded-capacitor)
+* Install the dedicated skill for full codebase context: `npx skills add Plaud-AI/embedded-capacitor`
+
 #### How to Implement the Embedded SDK for Android
-The Embedded SDK for Android is not out yet! Get started with using the SDK for the user's iOS in the meantime.
+The [Embedded SDK for Android](https://docs.plaud.ai/plaud-embedded/android-sdk.md) is not out yet! Get started with using the SDK for the user's iOS in the meantime.
 
 ## Definition of Done - Completed Implementation of the Embedded SDK
 When the user can: 

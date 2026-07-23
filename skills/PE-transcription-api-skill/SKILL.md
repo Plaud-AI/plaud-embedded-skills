@@ -48,6 +48,10 @@ After an audio file has been uploaded to a public download API (either via the F
 
 The [Transcription API Overview](https://docs.plaud.ai/plaud-embedded/transcription-api-overview.md) goes through how Plaud's transcription flow works.
 
+**IMPORTANT**: The Transcription API authenticates with your `X-Client-Id` and `X-Client-Api-Key` headers (the `api_key` is NOT your `client_secret` — grab it from the developer portal under App Settings > API Keys). It is served from region-level hosts (US and Japan available; EU and Singapore coming soon) — confirm the Region URL with the user.
+
+**TIP**: The [Plaud Embedded API Playground](https://plaud-embedded-playground.vercel.app/) lets the user walk through the full transcription flow (authentication → upload → transcription) with their own credentials before writing code.
+
 #### API Reference
 * [Submit audio URL for transcription](https://docs.plaud.ai/api-reference/transcription-api/submit-audio-for-transcription.md)
 * [Get transcription task status/results](https://docs.plaud.ai/api-reference/transcription-api/get-transcription-task.md)
