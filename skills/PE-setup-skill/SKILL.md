@@ -64,15 +64,18 @@ Read [these docs](https://docs.plaud.ai/plaud-embedded/how-plaud-embedded-works.
         * Note: The script uses the US region as the base URL
     * Alternatively, use the [Plaud Embedded API Playground](https://plaud-embedded-playground.vercel.app/) to generate tokens and walk through the full flow (authentication → recording → uploading → transcription) with your own client credentials
 
-After a user has their Plaud Embedded credentials and authentication setup, they're ready to start building with the **Plaud Embedded SDK (currently only for iOS, Android coming soon) and the Transcription API**! 
+After a user has their Plaud Embedded credentials and authentication setup, they're ready to start building with the **Plaud Embedded SDK and the Transcription API**! 
 
-The Embedded SDK is a native iOS SDK, but it can be used from several kinds of apps:
+The Embedded SDK supports both native iOS and android. If the user wants to setup a native app:
 
-1. A native iOS app (or Plaud's iOS Starter App)
-2. A **React Native** app via Plaud's Expo Native Module ([docs](https://docs.plaud.ai/plaud-embedded/react-native.md))
+1. Use the `plaud-embedded-ios-sdk-skill` for native iOS apps
+2. Use the `plaud-embedded-android-sdk-skill` for native Android apps
+
+If the user is NOT building a native app, the Embedded SDK can also be used as a native plugin for:
+
+1. A **React Native** app via Plaud's Expo Native Module ([docs](https://docs.plaud.ai/plaud-embedded/react-native.md))
+2. A **Flutter** app via Flutter's platform channels and native plugins ([docs](https://docs.plaud.ai/plaud-embedded/flutter.md))
 3. A **web app** wrapped into a native iOS app via Plaud's Capacitor plugin ([docs](https://docs.plaud.ai/plaud-embedded/web-app-wrapper.md))
-
-Once they're ready, use the `plaud-embedded-mobile-sdk-skill` and the `plaud-embedded-transcription-api-skill` to help the user implement the Embedded SDK and Transcription API
 
 ## Authentication API Reference
 * [Get Partner Token API](https://docs.plaud.ai/api-reference/authentication-api/get-partner-token.md)
