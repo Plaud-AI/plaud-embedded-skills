@@ -59,9 +59,7 @@ Read [these docs](https://docs.plaud.ai/plaud-embedded/how-plaud-embedded-works.
 1. If a user does not have their Plaud Embedded application created yet: Use [this guide](https://docs.plaud.ai/plaud-embedded/quickstart.md) to help the user create their Plaud Embedded application, retrieve their `CLIENT_ID`, `CLIENT_SECRET`, and `API_KEY`
     * They can do this on the [Plaud Developer Portal](https://portal.plaud.ai)
 2. Once a user has their Plaud Embedded credentials, use [this guide on Plaud authentication](https://docs.plaud.ai/plaud-embedded/auth-api-overview.md) to build a server-side endpoint OR a script (if testing locally) to generate a user token
-    * **IMPORTANT**: Confirm the Region URL with the user. Plaud Embedded APIs are served from **region-level** hosts (there is no global host). **US** (`platform-us.plaud.ai/developer/api`) and **Japan** (`platform-jp.plaud.ai/developer/api`) are available; **Europe** and **Singapore** are coming soon. Credentials are issued per region and only authenticate against their matching `platform-<region>.plaud.ai` host.
     * Use this [user-token-script.ts](references/user-token-script.ts) for reference on how to retrieve a partner and a user token
-        * Note: The script uses the US region as the base URL
     * Alternatively, use the [Plaud Embedded API Playground](https://plaud-embedded-playground.vercel.app/) to generate tokens and walk through the full flow (authentication → recording → uploading → transcription) with your own client credentials
 
 After a user has their Plaud Embedded credentials and authentication setup, they're ready to start building with the **Plaud Embedded SDK and the Transcription API**! 

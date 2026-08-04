@@ -37,8 +37,6 @@ This can be performed either from your mobile app or from your backend.
 
 Read the [File Upload Overview](https://docs.plaud.ai/plaud-embedded/file-api-overview.md) for the available File Upload API endpoints and data flow.
 
-**IMPORTANT**: Confirm the Region URL with the user
-
 #### API Reference (The Upload Step is not included as it's directly to S3)
 * [Generating presigned upload URLs](https://docs.plaud.ai/api-reference/file-upload-api/generate-presigned-upload-urls.md) 
 * [Completing the upload](https://docs.plaud.ai/api-reference/file-upload-api/complete-multipart-upload.md) 
@@ -48,7 +46,7 @@ After an audio file has been uploaded to a public download API (either via the F
 
 The [Transcription API Overview](https://docs.plaud.ai/plaud-embedded/transcription-api-overview.md) goes through how Plaud's transcription flow works.
 
-**IMPORTANT**: The Transcription API authenticates with your `X-Client-Id` and `X-Client-Api-Key` headers (the `api_key` is NOT your `client_secret` — grab it from the developer portal under App Settings > API Keys). It is served from region-level hosts (US and Japan available; EU and Singapore coming soon) — confirm the Region URL with the user.
+**IMPORTANT**: The Transcription API authenticates with your `X-Client-Id` and `X-Client-Api-Key` headers (the `api_key` is NOT your `client_secret` — grab it from the developer portal under App Settings > API Keys). 
 
 **TIP**: The [Plaud Embedded API Playground](https://plaud-embedded-playground.vercel.app/) lets the user walk through the full transcription flow (authentication → upload → transcription) with their own credentials before writing code.
 
