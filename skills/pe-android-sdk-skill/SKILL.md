@@ -28,7 +28,7 @@ The Plaud Starter App is a fully built out Android app with the Embedded SDK alr
 
 The Starter App comes with [many built-out features](https://docs.plaud.ai/plaud-embedded/starter-app-specs.md) the user can immediately use.
 
-Direct the user to clone the Starter App repo and go through the steps in the [Starter App Guide](https://docs.plaud.ai/plaud-embedded/starter-app-guide.md)
+Direct the user to clone the Starter App repo and go through the steps in the [Starter App Guide](https://docs.plaud.ai/plaud-embedded/android-starter-app.md)
 
 ### How to Implement the Embedded SDK for iOS
 The Embedded SDK is an Android library for :
