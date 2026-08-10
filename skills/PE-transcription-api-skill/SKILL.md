@@ -30,8 +30,6 @@ The Transcription API itself requires a public download URL to download the audi
 
 Else, skip the File Upload API and use the Transcription API directly.
 
-**NOTE**: The two APIs authenticate **differently** — the File Upload API uses `Authorization: Bearer <user_access_token>`, while the Transcription API uses the `X-Client-Id` / `X-Client-Api-Key` headers.
-
 ### File Upload API \[ONLY FOR USERS WHO DO NOT HAVE A DOWNLOAD URL TO ACCESS THEIR AUDIO FILE\]
 
 The File Upload API is an API to use Plaud's cloud storage to upload audio files. 
@@ -73,10 +71,6 @@ Supported audio formats for `file_url` are **M4A, MP3, and WAV**. Recordings **e
 **Polling**: the `GET` endpoint returns a `status` of `PENDING`, `RECEIVED`, `STARTED`, or `PROGRESS` while the task is in flight — keep polling. `SUCCESS` means `data` is populated. `FAILURE` and `REVOKED` are **terminal failures** — handle them rather than polling forever.
 
 On `SUCCESS`, `data` carries `text`, `language`, `duration` (seconds), and an array of time-aligned segments (`start`, `end`, `text`, `speaker_id` when diarization is enabled, `language`, and a language-confidence probability).
-
-**Always confirm the exact response shape against the [API reference](https://docs.plaud.ai/api-reference/transcription-api/get-transcription-task.md)** before writing parsing code — the prose overview page and the OpenAPI reference currently show the segment array under different key names.
-
-**TIP**: The [Plaud Embedded API Playground](https://plaud-embedded-playground.vercel.app/) lets the user walk through the full transcription flow (authentication → upload → transcription) with their own credentials before writing code.
 
 #### API Reference
 * [Submit audio URL for transcription](https://docs.plaud.ai/api-reference/transcription-api/submit-audio-for-transcription.md)

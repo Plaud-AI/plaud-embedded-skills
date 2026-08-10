@@ -77,12 +77,6 @@ The two high-level facades are **`PlaudDeviceAgent`** (BLE lifecycle, file sync,
 
 The SDK is delegate-driven — you implement protocols (`PlaudDeviceAgentProtocol`, `AudioExportCallback`, `PlaudWiFiAgentProtocol`) to receive device events, transfer progress, and results.
 
-* On `PlaudDeviceAgentProtocol`, **`blePenState` is the only required member** — every other callback is `@objc optional`, so implement only what's needed
-* `AudioExportCallback` is an `@objc` protocol, so the conformer must be an `NSObject` subclass, and the app must **retain** the export handler (the SDK does not)
-* Callbacks are delivered on the SDK's internal dispatch queues — **marshal to the main queue** before touching UIKit or published state
-
-Binding a device takes **two steps**: a cloud bind (`POST /open/partner/sdk/bind` with the User Token) so device status is trackable remotely, and a BLE bind that generates the key pair on the device itself. Unbinding mirrors this over both cloud and BLE — on iOS, call `depair(clear: true)` for the unbind flow (the argument defaults to `false`, so pass it explicitly).
-
 **IMPORTANT**: Plaud devices can only be bound to **one application at a time**. Warn the user to **unbind the device before uninstalling their app** — otherwise it cannot be bound to another app (or the Plaud app) until it is recovered.
 
 **NOTE**: Plaud devices record **up to 5 hours** per file. Longer recordings should be broken up.

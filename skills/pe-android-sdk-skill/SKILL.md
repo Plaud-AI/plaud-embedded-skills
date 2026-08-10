@@ -21,27 +21,6 @@ If a user does not have both of these prerequisites, use the `plaud-embedded-pro
 
 Follow the instructions in the [Installation Guide](https://docs.plaud.ai/plaud-embedded/android-sdk.md)
 
-### Compatibility Requirements
-
-| Requirement | Value |
-| ---- | ---- |
-| Android | 5.0+ (`minSdk 21`) |
-| `compileSdk` | 34 |
-| Java Development Kit (JDK) | 17 |
-| Architecture | `arm64-v8a` / `armeabi-v7a` — **testing requires a physical device, NOT an emulator** |
-
-**Please Note** the compatibility version requirements and the permissions necessary for the Embedded SDK for Android. See the [sample build.gradle config](references/build.gradle) for how to build a project with the Android SDK.
-
-The Android SDK ships as a **pre-built `.aar`**. Clone [plaud-sdk-public](https://github.com/Plaud-AI/plaud-sdk-public), copy `sdk/android/plaud-sdk.aar` into the app module's `libs/` directory, and declare it:
-
-```groovy
-dependencies {
-    implementation files('libs/plaud-sdk.aar')
-}
-```
-
-**NOTE**: The Android Embedded SDK is generally available with **full feature parity with the iOS SDK**. If the user is NOT building a native Android app, note that Plaud's React Native, Flutter, and Capacitor plugins wrap the **iOS** SDK, so those paths are iOS-only today — see the `plaud-embedded-project-setup-skill`.
-
 ### How to Deploy the Plaud Starter App
 The Plaud Starter App is a fully built out Android app with the Embedded SDK already implemented.
 
@@ -65,24 +44,16 @@ The SDK is a callback-driven library - you implement callbacks (`PlaudDeviceAgen
 
 * `PlaudDeviceAgentListener` has **0 required members** — assign one global listener to `PlaudDeviceAgent.listener` and override only what's needed
 * `IWifiTransferAgent.WifiTransferCallback` has **12 required members** — there are no default implementations
-* For firmware, extend `SimpleFirmwareUpdateCallback()` to override only the phases needed
-* Callbacks are delivered on the SDK's internal threads — **marshal to the main thread** (e.g. `runOnUiThread { }`) before touching UI or view state
 
 BLE scanning requires runtime permissions. Use the SDK's `sdk.permission.PermissionManager`, which requests the full set it needs (`BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT`, `ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION` on API 31+; `BLUETOOTH`, `BLUETOOTH_ADMIN`, and both location permissions on API ≤ 30).
-
-Binding a device takes **two steps**: a cloud bind (`POST /open/partner/sdk/bind` with the User Token) so device status is trackable remotely, and a BLE bind that generates the key pair on the device itself.
 
 **IMPORTANT (Android-specific)**: Two things must be in place before `connectBleDevice(...)` or the secure handshake fails —
 1. The partner RSA key pair must have arrived (`initSDK` fetches it; poll `NiceBuildSdk.isPartnerDataReady()`)
 2. The serial number must be signed and stored with `NiceBuildSdk.signAndStoreDeviceSn(deviceType, sn)`
 
-Unbinding mirrors the bind over both cloud and BLE — on Android, call `depair(clear = false)` for the normal unbind flow. Reserve `clear = true` for recovering a device with stale on-device pairing state.
-
 **IMPORTANT**: Plaud devices can only be bound to **one application at a time**. Warn the user to **unbind the device before uninstalling their app** — otherwise it cannot be bound to another app (or the Plaud app) until it is recovered.
 
 **NOTE**: Plaud devices record **up to 5 hours** per file. Longer recordings should be broken up.
-
-For WiFi Fast Transfer, use `PlaudDeviceAgent.exportAudioViaWiFi(...)` rather than the raw `downloadFile()` / `downloadAllFiles()` path on `IWifiTransferAgent` — those write undecrypted `.opus` bytes straight to disk. End the session with `PlaudDeviceAgent.endWiFiTransfer()`, **not** `getWifiAgent().stopWifiTransfer()`; only the former also tells the device to close its hotspot over BLE.
 
 Use the [Android SDK documentation](https://docs.plaud.ai/plaud-embedded/android-sdk.md) for the key methods and callbacks included in the SDK.
 
