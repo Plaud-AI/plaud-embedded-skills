@@ -37,6 +37,14 @@ This can be performed either from your mobile app or from your backend.
 
 Read the [File Upload Overview](https://docs.plaud.ai/plaud-embedded/file-api-overview.md) for the available File Upload API endpoints and data flow.
 
+It is a **3-step multipart upload**:
+
+1. `POST /generate-presigned-urls` with `filesize` and `filetype` → returns `FileId`, `UploadId`, `ChunkSize`, and a `Parts` array of presigned S3 URLs
+2. `PUT` up to `ChunkSize` of raw bytes to each `PresignedUrl` (no auth — these are presigned). **Keep the `ETag` response header from every `PUT`** — the next step needs them
+3. `POST /complete-upload` with `file_id`, `upload_id`, the `part_list` of `PartNumber`/`ETag` pairs, `filetype`, and `file_md5` → returns the `DownloadUrl`
+
+**IMPORTANT**: The returned `DownloadUrl` is valid for **24 hours**. Pass it as `file_url` to the Transcription API.
+
 #### API Reference (The Upload Step is not included as it's directly to S3)
 * [Generating presigned upload URLs](https://docs.plaud.ai/api-reference/file-upload-api/generate-presigned-upload-urls.md) 
 * [Completing the upload](https://docs.plaud.ai/api-reference/file-upload-api/complete-multipart-upload.md) 
@@ -48,14 +56,29 @@ The [Transcription API Overview](https://docs.plaud.ai/plaud-embedded/transcript
 
 **IMPORTANT**: The Transcription API authenticates with your `X-Client-Id` and `X-Client-Api-Key` headers (the `api_key` is NOT your `client_secret` — grab it from the developer portal under App Settings > API Keys). 
 
-**TIP**: The [Plaud Embedded API Playground](https://plaud-embedded-playground.vercel.app/) lets the user walk through the full transcription flow (authentication → upload → transcription) with their own credentials before writing code.
+Supported audio formats for `file_url` are **M4A, MP3, and WAV**. Recordings **exceeding 5 hours** should be broken into chunks and transcribed in parts.
+
+`POST` accepts an optional `params` object to tune the pipeline:
+
+| Param | Default | Purpose |
+| ---- | ---- | ---- |
+| `transcribe.language` | `auto` | BCP-47 code (`en-US`, `zh-CN`) or `auto` |
+| `transcribe.detection_level` | `segment` | Language identification level (`segment` or `chapter`) |
+| `vad.decode_silence` | `false` | Whether to decode silent regions |
+| `diarization.enabled` | `false` | Identify and label speakers |
+| `diarization.return_embedding` | `false` | Return speaker embedding vectors |
+
+**Polling**: the `GET` endpoint returns a `status` of `PENDING`, `RECEIVED`, `STARTED`, or `PROGRESS` while the task is in flight — keep polling. `SUCCESS` means `data` is populated. `FAILURE` and `REVOKED` are **terminal failures** — handle them rather than polling forever.
+
+On `SUCCESS`, `data` carries `text`, `language`, `duration` (seconds), and an array of time-aligned segments (`start`, `end`, `text`, `speaker_id` when diarization is enabled, `language`, and a language-confidence probability).
 
 #### API Reference
 * [Submit audio URL for transcription](https://docs.plaud.ai/api-reference/transcription-api/submit-audio-for-transcription.md)
 * [Get transcription task status/results](https://docs.plaud.ai/api-reference/transcription-api/get-transcription-task.md)
 
 ## Reference Code
-* [Snippet from Plaud Starter App](https://raw.githubusercontent.com/Plaud-AI/plaud-sdk-public/refs/heads/main/plaud-template-app/ios/PlaudTemplateApp/Managers/TranscriptionManager.swift)
+* iOS — [TranscriptionManager.swift from the Plaud Starter App](https://raw.githubusercontent.com/Plaud-AI/plaud-sdk-public/refs/heads/main/plaud-template-app/ios/PlaudTemplateApp/Managers/TranscriptionManager.swift)
+* Android — [TranscriptionManager.kt from the Plaud Starter App](https://raw.githubusercontent.com/Plaud-AI/plaud-sdk-public/refs/heads/main/android/app/src/main/java/com/plaud/template/managers/TranscriptionManager.kt)
 
 ## Definition of Done - Completed Implmentation of the Transcription API
 When the user can: 
