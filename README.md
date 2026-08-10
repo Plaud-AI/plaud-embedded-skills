@@ -57,6 +57,9 @@ Setup Plaud auth for my app
 Deploy the Plaud iOS starter app
 ```
 ```prompt
+Deploy the Plaud Android starter app
+```
+```prompt
 Set up device connection to Plaud devices
 ```
 ```prompt
