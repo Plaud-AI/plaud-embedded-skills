@@ -79,7 +79,7 @@ The SDK is delegate-driven — you implement protocols (`PlaudDeviceAgentProtoco
 
 **IMPORTANT**: Plaud devices can only be bound to **one application at a time**. Warn the user to **unbind the device before uninstalling their app** — otherwise it cannot be bound to another app (or the Plaud app) until it is recovered.
 
-**NOTE**: Plaud devices record **up to 5 hours** per file. Longer recordings should be broken up.
+**NOTE**: When binding and unbinding devices, use the SDK method first before calling the API. This ensures that cloud state reflects the device's true state. If the device bind/unbind fails, do not call the API.
 
 Use the [iOS SDK documentation](https://docs.plaud.ai/plaud-embedded/ios-sdk.md) for the key methods and protocols included in the SDK.
 
